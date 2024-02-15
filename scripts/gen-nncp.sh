@@ -375,6 +375,8 @@ EOF_CAT
         address:
           - ip: ${LO_IP_ADDRESS}
             prefix-length: 32
+          - ip: ${LO_IP_ADDRESS2}
+            prefix-length: 32
         enabled: true
         dhcp: false
       ipv6:

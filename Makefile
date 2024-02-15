@@ -210,6 +210,7 @@ NNCP_BGP_1_INTERFACE  ?= enp7s0
 NNCP_BGP_2_INTERFACE  ?= enp8s0
 NNCP_BGP_1_IP_ADDRESS ?= 100.65.4.2
 NNCP_BGP_2_IP_ADDRESS ?= 100.64.4.2
+BGP_OSP_EXT_GW_IP     ?= 172.16.201.1
 
 # Cinder
 CINDER_IMG             ?= quay.io/openstack-k8s-operators/cinder-operator-index:${OPENSTACK_K8S_TAG}
@@ -2060,6 +2061,7 @@ nncp: export INTERFACE_BGP_2=${NNCP_BGP_2_INTERFACE}
 nncp: export BGP_1_IP_ADDRESS=${NNCP_BGP_1_IP_ADDRESS}
 nncp: export BGP_2_IP_ADDRESS=${NNCP_BGP_2_IP_ADDRESS}
 nncp: export LO_IP_ADDRESS=${BGP_SOURCE_IP}
+nncp: export LO_IP_ADDRESS2=${BGP_OSP_EXT_GW_IP}
 nncp: export LO_IP6_ADDRESS=${BGP_SOURCE_IP6}
 endif
 ifeq ($(NETWORK_ISOLATION_IPV6), true)
@@ -2174,6 +2176,7 @@ metallb_config: export PEER_ASN=${BGP_PEER_ASN}
 metallb_config: export LEAF_1=${BGP_LEAF_1}
 metallb_config: export LEAF_2=${BGP_LEAF_2}
 metallb_config: export SOURCE_IP=${BGP_SOURCE_IP}
+metallb_config: export SOURCE_IP_2=${BGP_OSP_EXT_GW_IP}
 metallb_config: export SOURCE_IP6=${BGP_SOURCE_IP6}
 metallb_config: metallb_config_cleanup ## creates the IPAddressPools and l2advertisement resources
 	$(eval $(call vars,$@,metallb))

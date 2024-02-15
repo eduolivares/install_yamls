@@ -241,6 +241,7 @@ data:
   extras: |
     router bgp ${ASN}
       network ${SOURCE_IP}/32
+      network ${SOURCE_IP_2}/32
       neighbor ${LEAF_1} allowas-in origin
       neighbor ${LEAF_2} allowas-in origin
 
@@ -255,6 +256,7 @@ data:
     ip protocol bgp route-map ${LEAF_2}-in
 
     ip prefix-list ocp-lo permit ${SOURCE_IP}/32
+    ip prefix-list ocp-lo permit ${SOURCE_IP_2}/32
     route-map ${LEAF_1}-out permit 3
       match ip address prefix-list ocp-lo
     route-map ${LEAF_2}-out permit 3
